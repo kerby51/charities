@@ -21511,7 +21511,12 @@
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          'WELCOME'
+	          'GoFundThem'
+	        ),
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          'World\'s #2 Fundraising Site'
 	        ),
 	        _react2.default.createElement(_DonationForm2.default, { sendDonation: this.sendDonation })
 	      );
@@ -23184,8 +23189,9 @@
 	        null,
 	        _react2.default.createElement(
 	          'form',
-	          { onSubmit: this.handleSubmit },
+	          { className: 'donation-form', onSubmit: this.handleSubmit },
 	          _react2.default.createElement('input', {
+	            className: 'form-name',
 	            type: 'text',
 	            name: 'name',
 	            value: this.state.name,
@@ -23193,20 +23199,22 @@
 	            onChange: this.handleInput
 	          }),
 	          _react2.default.createElement('input', {
+	            className: 'form-charity',
 	            type: 'text',
 	            name: 'charityName',
 	            value: this.state.charityName,
-	            placeholder: 'your charity of choice',
+	            placeholder: 'charity of choice',
 	            onChange: this.handleInput
 	          }),
 	          _react2.default.createElement('input', {
+	            className: 'form-amount',
 	            type: 'number',
 	            name: 'amount',
 	            value: this.state.amount,
 	            placeholder: 'donation amount',
 	            onChange: this.handleInput
 	          }),
-	          _react2.default.createElement('input', { type: 'submit', value: 'DONATE' })
+	          _react2.default.createElement('input', { className: 'button', type: 'submit', value: 'DONATE' })
 	        )
 	      );
 	    }

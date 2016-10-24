@@ -35,8 +35,9 @@ class DonationForm extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form className="donation-form" onSubmit={this.handleSubmit}>
           <input
+            className="form-name"
             type="text"
             name="name"
             value={this.state.name}
@@ -44,20 +45,22 @@ class DonationForm extends React.Component {
             onChange={this.handleInput}
           />
           <input
+            className="form-charity"
             type="text"
             name="charityName"
             value={this.state.charityName}
-            placeholder="your charity of choice"
+            placeholder="charity of choice"
             onChange={this.handleInput}
           />
           <input
+            className="form-amount"
             type="number"
             name="amount"
             value={this.state.amount}
             placeholder="donation amount"
             onChange={this.handleInput}
           />
-          <input type="submit" value="DONATE" />
+          <input className="button" type="submit" value="DONATE" />
         </form>
       </div>
     );

@@ -29,7 +29,8 @@ class App extends React.Component {
   render() {
     return (
       <div id="container">
-        <h1>WELCOME</h1>
+        <h1>GoFundThem</h1>
+        <h4>World's #2 Fundraising Site</h4>
         <DonationForm sendDonation={this.sendDonation} />
 
       </div>
