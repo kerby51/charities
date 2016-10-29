@@ -3,14 +3,14 @@
 }
 
 body {
-  background-color: lightyellow;
+  background-color: white;
 }
 
 h1 {
   margin: 0 auto;
   margin-top: 40px;
   text-align: center;
-  color: darkgray;
+  color: #F62459;
   font-family: helvetica;
   font-size: 2.5em;
   padding-bottom: 3px;
@@ -21,14 +21,22 @@ h1 {
 
 h4 {
   color: black;
-  font-family: helvetica;
+  font-family: 'Courgette', cursive;
+  font-size: 1.5em;
   margin: 0 auto;
   text-align: center;
   padding-bottom: 25px;
   border-bottom: 1px solid darkgray;
   background-color: white;
+
 }
 
+#header {
+  box-shadow: inset -30px -33px 17px -12px #ABABAB,4px 5px 52px 1px #242424;
+-webkit-box-shadow: inset -30px -33px 17px -12px #ABABAB,4px 5px 52px 1px #242424;
+-moz-box-shadow: inset -30px -33px 17px -12px #ABABAB,4px 5px 52px 1px #242424;
+-o-box-shadow: inset -30px -33px 17px -12px #ABABAB,4px 5px 52px 1px #242424;
+}
 .form-name {
   display: block;
   vertical-align: middle;
@@ -38,7 +46,7 @@ h4 {
   margin: 0 auto;
   margin-top: 30px;
   font-size: 1em;
-  border: 1.5px solid lightgray;
+  border: 1.5px solid #F62459;
 }
 
 .form-charity {
@@ -50,6 +58,7 @@ h4 {
   margin: 0 auto;
   margin-top: 10px;
   font-size: 1em;
+  border: 1.5px solid #F62459;
 }
 
 .form-amount {
@@ -62,20 +71,90 @@ h4 {
   margin: 0 auto;
   margin-top: 10px;
   font-size: 1em;
+  border: 1.5px solid #F62459;
 }
 
 .donation-form {
   text-align: center;
   margin-top: 80px;
+  padding-bottom: 80px;
 }
 
 .button {
   margin: 0 auto;
   margin-top: 20px;
   text-align: center;
-  width: 100px;
+  width: 240px;
   height: 50px;
-  background-color: darkgray;
-  font-size: 1em;
+  background-color: #F62459;
+  font-size: 1.3em;
   color: white;
+  border-radius: 5px;
+box-shadow: inset -2px -2px 0px -29px #ABABAB,5px 7px 10px 3px #DDDDDD;
+-webkit-box-shadow: inset -2px -2px 0px -29px #ABABAB,5px 7px 10px 3px #DDDDDD;
+-moz-box-shadow: inset -2px -2px 0px -29px #ABABAB,5px 7px 10px 3px #DDDDDD;
+-o-box-shadow: inset -2px -2px 0px -29px #ABABAB,5px 7px 10px 3px #DDDDDD;
+
+}
+
+.donation-list {
+  margin: 0 auto;
+  text-align: center;
+  padding: 0;
+  border-top: 1px solid #F62459;
+  background-color: white;
+  width: 500px;
+  overflow: hidden;
+}
+
+@-moz-keyframes scroll-left {
+ 0%   { -moz-transform: translateY(100%); }
+ 100% { -moz-transform: translateY(-100%); }
+}
+@-webkit-keyframes scroll-left {
+ 0%   { -webkit-transform: translateY(100%); }
+ 100% { -webkit-transform: translateY(-100%); }
+}
+@keyframes scroll-left {
+ 0%   {
+ -moz-transform: translateY(100%); /* Browser bug fix */
+ -webkit-transform: translateY(100%); /* Browser bug fix */
+ transform: translateY(100%);
+ }
+ 100% {
+ -moz-transform: translateY(-100%); /* Browser bug fix */
+ -webkit-transform: translateY(-100%); /* Browser bug fix */
+ transform: translateY(-100%);
+ }
+}
+
+.donations-header {
+  margin: 0 auto;
+  text-align: center;
+  width: 500px;
+  height: 50px;
+  color: #F62459;
+  font-family: 'Mirza', cursive;
+  font-size: 2rem;
+}
+
+.donation-box {
+  /*border: 1px solid lightgray;*/
+  width: 500px;
+  height: 70px;
+  /*background-color: white;*/
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+    -moz-transform:translateX(100%);
+ -webkit-transform:translateX(100%);
+ transform:translateX(100%);
+ /* Apply animation to this element */
+ -moz-animation: scroll-left 15s linear infinite;
+ -webkit-animation: scroll-left 15s linear infinite;
+ animation: scroll-left 15s linear infinite;
+}
+
+#charityName {
+  font-style: italic;
 }
