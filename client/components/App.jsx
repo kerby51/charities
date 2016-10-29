@@ -1,7 +1,7 @@
 import React from 'react';
 import request from 'superagent';
 import DonationForm from './DonationForm.jsx';
-
+import DonationList from './DonationList.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,9 +19,9 @@ class App extends React.Component {
              this.setState({ donations });
            });
   }
-  sendDonation({ name, charityName, amount }) {
+  sendDonation({ name, charity, amount }) {
     request.post('/api/donations')
-           .send({ name, charityName, amount })
+           .send({ name, charity, amount })
            .then(() => {
              this.getDonations();
            });
@@ -29,9 +29,12 @@ class App extends React.Component {
   render() {
     return (
       <div id="container">
-        <h1>GoFundThem</h1>
-        <h4>World's #2 Fundraising Site</h4>
+        <div id="header">
+          <h1>GoFundThem</h1>
+          <h4>World's #2 Fundraising Site</h4>
+        </div>
         <DonationForm sendDonation={this.sendDonation} />
+        <DonationList donations={this.state.donations} />
 
       </div>
     );
