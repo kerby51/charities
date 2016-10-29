@@ -1,8 +1,8 @@
 class Donations {
-  constructor({ id, name, charityName, amount }) {
+  constructor({ id, name, charity, amount }) {
     this.id = id;
     this.name = name;
-    this.charityName = charityName;
+    this.charity = charity;
     this.amount = amount;
   }
 }
