@@ -6,8 +6,8 @@ class DonationDAO {
   static all() {
     return db.map(sql.all, [], (row) => new Donation(row));
   }
-  static create({ name, charityName, amount }) {
-    return db.one(sql.create, [name, charityName, amount])
+  static create({ name, charity, amount }) {
+    return db.one(sql.create, [name, charity, amount])
              .then((data) => new Donation(data));
   }
 }
