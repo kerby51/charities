@@ -21453,6 +21453,10 @@
 	
 	var _DonationForm2 = _interopRequireDefault(_DonationForm);
 	
+	var _DonationList = __webpack_require__(179);
+	
+	var _DonationList2 = _interopRequireDefault(_DonationList);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21495,10 +21499,10 @@
 	      var _this3 = this;
 	
 	      var name = _ref.name;
-	      var charityName = _ref.charityName;
+	      var charity = _ref.charity;
 	      var amount = _ref.amount;
 	
-	      _superagent2.default.post('/api/donations').send({ name: name, charityName: charityName, amount: amount }).then(function () {
+	      _superagent2.default.post('/api/donations').send({ name: name, charity: charity, amount: amount }).then(function () {
 	        _this3.getDonations();
 	      });
 	    }
@@ -21509,16 +21513,21 @@
 	        'div',
 	        { id: 'container' },
 	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'GoFundThem'
+	          'div',
+	          { id: 'header' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'GoFundThem'
+	          ),
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            'World\'s #2 Fundraising Site'
+	          )
 	        ),
-	        _react2.default.createElement(
-	          'h4',
-	          null,
-	          'World\'s #2 Fundraising Site'
-	        ),
-	        _react2.default.createElement(_DonationForm2.default, { sendDonation: this.sendDonation })
+	        _react2.default.createElement(_DonationForm2.default, { sendDonation: this.sendDonation }),
+	        _react2.default.createElement(_DonationList2.default, { donations: this.state.donations })
 	      );
 	    }
 	  }]);
@@ -23139,7 +23148,10 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var propTypes = {
-	  sendDonation: _react2.default.PropTypes.func
+	  sendDonation: _react2.default.PropTypes.func,
+	  name: _react2.default.PropTypes.string,
+	  charity: _react2.default.PropTypes.string,
+	  amount: _react2.default.PropTypes.number
 	};
 	
 	var DonationForm = function (_React$Component) {
@@ -23151,9 +23163,9 @@
 	    var _this = _possibleConstructorReturn(this, (DonationForm.__proto__ || Object.getPrototypeOf(DonationForm)).call(this, props));
 	
 	    _this.state = {
-	      name: '',
-	      charityName: '',
-	      amount: ''
+	      localName: _this.props.name || '',
+	      localCharity: _this.props.charity || '',
+	      localAmount: _this.props.amount || ''
 	    };
 	    _this.handleInput = _this.handleInput.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -23161,6 +23173,15 @@
 	  }
 	
 	  _createClass(DonationForm, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        localName: nextProps.name || '',
+	        localCharity: nextProps.charity || '',
+	        localAmount: nextProps.amount || ''
+	      });
+	    }
+	  }, {
 	    key: 'handleInput',
 	    value: function handleInput(e) {
 	      var target = e.target;
@@ -23173,13 +23194,18 @@
 	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
-	      e.preventDefault();
-	      this.props.sendDonation(this.state);
-	      this.setState({
-	        name: '',
-	        charityName: '',
-	        amount: ''
+	      console.log('working');
+	      this.props.sendDonation({
+	        name: this.state.localName,
+	        charity: this.state.localCharity,
+	        amount: this.state.localAmount
 	      });
+	      this.setState({ saved: true });
+	    }
+	  }, {
+	    key: 'isSaved',
+	    value: function isSaved() {
+	      return this.props.name === this.state.localName && this.props.charity === this.state.localCharity && this.props.amount === this.state.localAmount;
 	    }
 	  }, {
 	    key: 'render',
@@ -23193,28 +23219,32 @@
 	          _react2.default.createElement('input', {
 	            className: 'form-name',
 	            type: 'text',
-	            name: 'name',
-	            value: this.state.name,
+	            name: 'localName',
+	            value: this.state.localName,
 	            placeholder: 'your name',
 	            onChange: this.handleInput
 	          }),
 	          _react2.default.createElement('input', {
 	            className: 'form-charity',
 	            type: 'text',
-	            name: 'charityName',
-	            value: this.state.charityName,
+	            name: 'localCharity',
+	            value: this.state.localCharity,
 	            placeholder: 'charity of choice',
 	            onChange: this.handleInput
 	          }),
 	          _react2.default.createElement('input', {
 	            className: 'form-amount',
 	            type: 'number',
-	            name: 'amount',
-	            value: this.state.amount,
+	            name: 'localAmount',
+	            value: this.state.localAmount,
 	            placeholder: 'donation amount',
 	            onChange: this.handleInput
 	          }),
-	          _react2.default.createElement('input', { className: 'button', type: 'submit', value: 'DONATE' })
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'button', type: 'submit', value: 'DONATE!' },
+	            'SIGN-UP TO DONATE!'
+	          )
 	        )
 	      );
 	    }
@@ -23226,6 +23256,98 @@
 	DonationForm.propTypes = propTypes;
 	
 	exports.default = DonationForm;
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _DonationForm = __webpack_require__(178);
+	
+	var _DonationForm2 = _interopRequireDefault(_DonationForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var propTypes = {
+	  donations: _react2.default.PropTypes.array,
+	  sendDonation: _react2.default.PropTypes.func
+	};
+	
+	var DonationList = function (_React$Component) {
+	  _inherits(DonationList, _React$Component);
+	
+	  function DonationList() {
+	    _classCallCheck(this, DonationList);
+	
+	    return _possibleConstructorReturn(this, (DonationList.__proto__ || Object.getPrototypeOf(DonationList)).apply(this, arguments));
+	  }
+	
+	  _createClass(DonationList, [{
+	    key: 'render',
+	    value: function render() {
+	      var donationElements = this.props.donations.map(function (donation, idx) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: idx, className: 'donation-box' },
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'donation-elements', id: 'amount' },
+	            '$',
+	            donation.amount,
+	            ' - ',
+	            _react2.default.createElement(
+	              'span',
+	              { id: 'charityName' },
+	              donation.charity
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'donation-elements', id: 'person' },
+	            donation.name
+	          )
+	        );
+	      });
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h3',
+	          { className: 'donations-header' },
+	          'DONATIONS'
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'donation-list' },
+	          donationElements.reverse()
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return DonationList;
+	}(_react2.default.Component);
+	
+	DonationList.propTypes = propTypes;
+	
+	exports.default = DonationList;
 
 /***/ }
 /******/ ]);
