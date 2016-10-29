@@ -6,7 +6,7 @@ CREATE DATABASE charities;
 CREATE TABLE donations (
   id SERIAL PRIMARY KEY,
   name VARCHAR,
-  charityName TEXT,
-  amount INTEGER
+  charity VARCHAR,
+  amount FLOAT
 );
 
