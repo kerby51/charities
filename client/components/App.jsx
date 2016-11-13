@@ -18,6 +18,7 @@ class App extends React.Component {
              const donations = response.body;
              this.setState({ donations });
            });
+           console.log(donations);
   }
   sendDonation({ name, charity, amount }) {
     request.post('/api/donations')

@@ -21492,6 +21492,7 @@
 	        var donations = response.body;
 	        _this2.setState({ donations: donations });
 	      });
+	      console.log(donations);
 	    }
 	  }, {
 	    key: 'sendDonation',
